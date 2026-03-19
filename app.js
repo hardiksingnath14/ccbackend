@@ -16,7 +16,7 @@ app.use(cors());
 app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use("/api/ai", aiChatRoute);
+app.use("/ai", aiChatRoute);
 app.use("/user",UserRouter);
 app.use("/product",ProductRouter);
 app.use("/category",CategoryRouter);
