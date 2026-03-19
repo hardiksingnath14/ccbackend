@@ -1,0 +1,19 @@
+npm init -y && npm install @babel/core @babel/node @babel/preset-env babel-plugin-add-module-exports && npm install nodemon --save-dev && npm install express body-parser && npm install mongoose@7.0.0 && npm install mongoose-unique-validator@4.0.1
+npm install jsonwebtoken randomstring
+npm install bcrypt
+
+File name:
+.babelrc
+ rename to .babelrc
+📄 Content:
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": ["add-module-exports"]
+}
+package.json me script add ki:
+"scripts": {
+  "dev": "nodemon --exec babel-node"
+}
+
+if reinstall windows then use this to install only for react module 
+npm install --legacy-peer-deps
