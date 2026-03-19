@@ -7,7 +7,7 @@ dotenv.config(); // 🔥 load env file
 mongoose.connect(process.env.DB_URL)
  .then(() => console.log("MongoDB Connected"))
  .catch(err => console.log(err));
-
+console.log("DB_URL:", process.env.DB_URL);
 console.log("Mongodb connected successfully....");
 
 

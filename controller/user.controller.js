@@ -32,6 +32,7 @@ export const login = async (req, res) => {
       const payload = users[0].email;
       const key = rs.generate(20);
       const token = jwt.sign(payload, key);
+      console.log("JWT_SECRET:", process.env.JWT_SECRET);
       res.status(200).json({ "status": true, "token": token, "info": users[0] });
     }
     else {
