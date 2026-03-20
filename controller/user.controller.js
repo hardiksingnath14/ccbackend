@@ -25,6 +25,7 @@ export const save = async (req, res) => {
 
 
 export const login = async (req, res) => {
+  console.log("hello");
   const users = await UserSchemaModel.find({ email: req.body.email, status: 1 }).select("+password");
   if (users.length > 0) {
     const match = await bcrypt.compare(req.body.password, users[0].password);
