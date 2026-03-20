@@ -25,5 +25,8 @@ app.use("/payment", PaymentRouter);
 
 //route for forgetpassword
 app.post("/forgetpassword",ForgetPassword);
+app.get("/",(req,res)=>{
+    res.send("Backend is live");
+});
 app.listen(3001);
 console.log("Server invoked at port http://localhost:3001");
