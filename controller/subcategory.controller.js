@@ -14,7 +14,7 @@ export const save = async (req, res) => {
         const subcaticonnm = Date.now() + "_" + subcaticon.name;
 
         const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-        const uploadpath = path.join(__dirname, '../../ui/public/assets/uploads/subcaticons', subcaticonnm);
+        const uploadpath = path.join(__dirname, '../../Ui/public/assets/uploads/subcaticons', subcaticonnm);
 
         await subcaticon.mv(uploadpath);
 

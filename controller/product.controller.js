@@ -20,7 +20,7 @@ export const save = async (req, res) => {
         const productIconName = `${Date.now()}_${productIcon.name}`;
 
         const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-        const uploadPath = path.join(__dirname, "../../ui/public/assets/uploads/producticons", productIconName);
+        const uploadPath = path.join(__dirname, "../../Ui/public/assets/uploads/producticons", productIconName);
         await productIcon.mv(uploadPath);
 
         // Handle PDF upload
@@ -28,7 +28,7 @@ export const save = async (req, res) => {
         if (req.files && req.files.pdf) {
             const productPdf = req.files.pdf;
             pdfName = `${Date.now()}_${productPdf.name}`;
-            const pdfUploadPath = path.join(__dirname, "../../ui/public/assets/uploads/productpdfs", pdfName);
+            const pdfUploadPath = path.join(__dirname, "../../Ui/public/assets/uploads/productpdfs", pdfName);
             await productPdf.mv(pdfUploadPath);
         }
 

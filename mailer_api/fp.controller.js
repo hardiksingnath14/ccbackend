@@ -15,8 +15,7 @@ const ForgetPassword = (req, res) => {
         }
     });
 
-    const frontendURL = process.env.FRONTEND_URL || "http://localhost:3000";
-    const resetLink = `${frontendURL}/resetpassword/${email}`;
+    const resetLink = `http://localhost:3000/resetpassword/${email}`;
     const year      = new Date().getFullYear();
 
     const mailOptions = {

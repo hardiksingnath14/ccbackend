@@ -16,7 +16,7 @@ export const save=async(req,res)=>{
   const caticonnm = Date.now() + "_" + caticon.name;   
 
   const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-  const uploadfilepath = path.join(__dirname,'../../ui/public/assets/uploads/caticons',caticonnm);
+  const uploadfilepath = path.join(__dirname,'../../Ui/public/assets/uploads/caticons',caticonnm);
 
   // CHANGE: Added 'name' field populated from 'catnm'
   // WHY: To satisfy the unique index on 'name' in the MongoDB collection
