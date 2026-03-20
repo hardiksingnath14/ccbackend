@@ -15,8 +15,8 @@ function sendMail(email, password) {
         console.error('sendMail: email and password are required');
         return;
     }  
-
-    const verifyLink = `http://localhost:3000/vemail/${email}`;
+    const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+    const verifyLink = `${FRONTEND_URL}/vemail/${email}`;
     const year       = new Date().getFullYear();
 
     const mailOptions = {
