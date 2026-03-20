@@ -23,7 +23,15 @@ app.use("/category",CategoryRouter);
 app.use("/subcategory",SubCategoryRouter);
 app.use("/payment", PaymentRouter);
 
-//route for forgetpassword
 app.post("/forgetpassword",ForgetPassword);
-app.listen(3001);
-console.log("Server invoed at port http://localhost:3001");
+app.get("/", (req, res) => {
+  res.send("✅ Server is live");
+});
+//route for forgetpassword
+if (process.env.NODE_ENV !== "production") {
+  app.listen(3001, () => {
+    console.log("Server running on http://localhost:3001");
+  });
+}
+
+export default app;
