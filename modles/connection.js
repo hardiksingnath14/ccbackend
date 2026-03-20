@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
- //import dotenv from "dotenv";
- mongoose.connect("mongodb://127.0.0.1:27017/silverpawn");
- //dotenv.config(); // 🔥 load env file
+ import dotenv from "dotenv";
+ //mongoose.connect("mongodb://127.0.0.1:27017/silverpawn");
+ dotenv.config(); // 🔥 load env file
 
-//  mongoose.connect(process.env.DB_URL)
-//  .then(() => console.log("MongoDB Connected"))
-//  .catch(err => console.log(err));
+  mongoose.connect(process.env.DB_URL)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
-console.log("Mongodb connected successfully....");
+//console.log("Mongodb connected successfully....");
 
 
 
