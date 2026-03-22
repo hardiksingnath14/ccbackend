@@ -7,13 +7,16 @@ const ForgetPassword = (req, res) => {
         return res.status(400).json({ success: false, message: "Email is required" });
     }
 
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS
-        }
-    });
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    family: 4, // 🔥 IMPORTANT (IPv4 force)
+    auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS
+    }
+});
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
     const resetLink = `${FRONTEND_URL}/resetpassword/${email}`;
     const year      = new Date().getFullYear();
