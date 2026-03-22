@@ -9,13 +9,16 @@ const ForgetPassword = (req, res) => {
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    family: 4, // 🔥 IMPORTANT (IPv4 force)
+    port: 465,
+    secure: true,       // 🔥 465 ke liye true
+    family: 4,
     auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS
-    }
+    },
+    connectionTimeout: 10000, // 10 sec
+    greetingTimeout: 10000,
+    socketTimeout: 10000
 });
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
     const resetLink = `${FRONTEND_URL}/resetpassword/${email}`;
