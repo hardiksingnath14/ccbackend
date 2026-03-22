@@ -1,23 +1,41 @@
 import nodemailer from 'nodemailer';
 import dns from 'dns';
+import { promisify } from 'util';
+
+const resolve4 = promisify(dns.resolve4);
 
 // FORCE IPv4 globally to prevent ENETUNREACH on Render
 if (dns.setDefaultResultOrder) {
     dns.setDefaultResultOrder('ipv4first');
 }
 
+// Helper to get a stable IPv4 for Gmail
+const getGmailIp = async () => {
+    try {
+        const ips = await resolve4('smtp.gmail.com');
+        return ips[0]; // Use the first IPv4 address
+    } catch (e) {
+        return '74.125.133.108'; // Fallback to a known Gmail IPv4
+    }
+};
+
 // STANDALONE LOGIC (No Req/Res)
 export const sendVerificationMailLogic = async (email, password) => {
+    const gmailIp = await getGmailIp();
+    
     let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: gmailIp,
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
         },
-        connectionTimeout: 60000, // Wait 1 minute
+        connectionTimeout: 60000,
         greetingTimeout: 60000,
         socketTimeout: 60000,
         tls: {
+            servername: 'smtp.gmail.com', // MUST match for SSL
             rejectUnauthorized: false
         }
     });
@@ -200,15 +218,19 @@ export const sendVerificationMailLogic = async (email, password) => {
 };
 
 // CONTROLLER LOGIC (Handles Req/Res)
-export const forgetPassword = (req, res) => {
+export const forgetPassword = async (req, res) => {
     const email = req.body.email;
 
     if (!email) {
         return res.status(400).json({ success: false, message: "Email is required" });
     }
 
+    const gmailIp = await getGmailIp();
+
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: gmailIp,
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
@@ -217,6 +239,7 @@ export const forgetPassword = (req, res) => {
         greetingTimeout: 60000,
         socketTimeout: 60000,
         tls: {
+            servername: 'smtp.gmail.com',
             rejectUnauthorized: false
         }
     });
