@@ -4,10 +4,18 @@ import nodemailer from 'nodemailer';
 export const sendVerificationMailLogic = async (email, password) => {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
-        }
+        },
+        // FORCE IPv4 to avoid ENETUNREACH on Render
+        tls: {
+            rejectUnauthorized: false
+        },
+        family: 4 
     });
 
     const verifyLink = process.env.FRONTEND_URL || `http://localhost:3000/vemail/${email}`;
@@ -197,10 +205,18 @@ export const forgetPassword = (req, res) => {
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
-        }
+        },
+        // FORCE IPv4 to avoid ENETUNREACH on Render
+        tls: {
+            rejectUnauthorized: false
+        },
+        family: 4
     });
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
     const resetLink = `${FRONTEND_URL}/resetpassword/${email}`;
