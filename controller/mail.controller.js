@@ -1,9 +1,14 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Force IPv4 DNS resolution
+const ipv4Lookup = (hostname, opts, cb) => {
+    return dns.lookup(hostname, { family: 4 }, cb);
+};
 
 // STANDALONE LOGIC (No Req/Res)
 export const sendVerificationMailLogic = async (email, password) => {
     let transporter = nodemailer.createTransport({
-        service: 'gmail',
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
@@ -11,11 +16,12 @@ export const sendVerificationMailLogic = async (email, password) => {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
         },
-        // FORCE IPv4 to avoid ENETUNREACH on Render
+        // FORCE IPv4 strictly
+        lookup: ipv4Lookup,
+        family: 4,
         tls: {
             rejectUnauthorized: false
-        },
-        family: 4 
+        }
     });
 
     const verifyLink = process.env.FRONTEND_URL || `http://localhost:3000/vemail/${email}`;
@@ -204,7 +210,6 @@ export const forgetPassword = (req, res) => {
     }
 
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
@@ -212,11 +217,12 @@ export const forgetPassword = (req, res) => {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
         },
-        // FORCE IPv4 to avoid ENETUNREACH on Render
+        // FORCE IPv4 strictly
+        lookup: ipv4Lookup,
+        family: 4,
         tls: {
             rejectUnauthorized: false
-        },
-        family: 4
+        }
     });
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
     const resetLink = `${FRONTEND_URL}/resetpassword/${email}`;
