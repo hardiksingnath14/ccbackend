@@ -6,10 +6,10 @@ import CategoryRouter from "./routes/category.router.js";
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import dotenv from "dotenv";
+import ForgetPassword from './mailer_api/fp.controller.js';
 import SubCategoryRouter from "./routes/subcategory.router.js";
 import PaymentRouter from "./routes/payment.router.js";
 import aiChatRoute from "./routes/aiChat.js";
-import MailRouter from "./routes/mail.router.js";
 
 dotenv.config();
 const app = express();
@@ -23,9 +23,9 @@ app.use("/product",ProductRouter);
 app.use("/category",CategoryRouter);
 app.use("/subcategory",SubCategoryRouter);
 app.use("/payment", PaymentRouter);
-app.use("/mail", MailRouter);
 
 //route for forgetpassword
+app.post("/forgetpassword",ForgetPassword);
 app.get("/",(req,res)=>{
     res.send("Backend is live");
 });
