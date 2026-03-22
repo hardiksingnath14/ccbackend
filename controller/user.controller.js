@@ -2,9 +2,11 @@ import "../modles/connection.js";
 import UserSchemaModel from "../modles/user.model.js";
 import jwt from 'jsonwebtoken';
 import rs from "randomstring";
-import sendMail from "../mailer_api/mailer.js";
+import * as MailController from "./mail.controller.js";
 import bcrypt from "bcrypt";
-import axios from 'axios';
+
+import dotenv from 'dotenv';
+dotenv.config();
 export const save = async (req, res) => {
 
   try {
@@ -15,8 +17,14 @@ export const save = async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     const userDetails = { ...req.body, password: hashedPassword, _id: _id, role: "user", status: 0, info: new Date() };
     await UserSchemaModel.create(userDetails);
-    //console.log(userDetails)
-    sendMail(req.body.email, req.body.password);
+    
+    // Internal direct call to send verification mail
+    try {
+      await MailController.sendVerificationMailLogic(req.body.email, req.body.password);
+    } catch (mailErr) {
+      console.error("Verification mail failed:", mailErr.message);
+    }
+
     res.status(200).json({ status: true });
 
   } catch (err) {
