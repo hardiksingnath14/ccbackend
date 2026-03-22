@@ -10,18 +10,23 @@ const ipv4Lookup = (hostname, opts, cb) => {
 export const sendVerificationMailLogic = async (email, password) => {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        port: 587,
+        secure: false, // true for 465, false for 587
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
         },
-        // FORCE IPv4 strictly
+        // Force IPv4
         lookup: ipv4Lookup,
         family: 4,
         tls: {
             rejectUnauthorized: false
-        }
+        },
+        connectionTimeout: 10000, // 10 seconds
+        greetingTimeout: 10000,
+        socketTimeout: 15000,
+        debug: true, // Show internal logs
+        logger: true // Log to console
     });
 
     const verifyLink = process.env.FRONTEND_URL || `http://localhost:3000/vemail/${email}`;
@@ -211,18 +216,23 @@ export const forgetPassword = (req, res) => {
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        port: 587,
+        secure: false, // true for 465, false for 587
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
         },
-        // FORCE IPv4 strictly
+        // Force IPv4
         lookup: ipv4Lookup,
         family: 4,
         tls: {
             rejectUnauthorized: false
-        }
+        },
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+        socketTimeout: 15000,
+        debug: true,
+        logger: true
     });
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
     const resetLink = `${FRONTEND_URL}/resetpassword/${email}`;
