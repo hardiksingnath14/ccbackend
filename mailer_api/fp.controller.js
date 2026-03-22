@@ -8,13 +8,12 @@ const ForgetPassword = (req, res) => {
     }
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "smtp-relay.brevo.com",
     port: 587,
     secure: false,
-    family: 4,
     auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS
+        user: process.env.MAIL_USER,   // a5a97f001@smtp-brevo.com
+        pass: process.env.MAIL_PASS    // 🔥 SMTP KEY (not gmail password)
     }
 });
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
