@@ -1,40 +1,32 @@
 import nodemailer from 'nodemailer';
 import dns from 'dns';
 
-// Force IPv4 DNS resolution
-const ipv4Lookup = (hostname, opts, cb) => {
-    return dns.lookup(hostname, { family: 4 }, cb);
-};
+// FORCE IPv4 globally to prevent ENETUNREACH on Render
+if (dns.setDefaultResultOrder) {
+    dns.setDefaultResultOrder('ipv4first');
+}
 
 // STANDALONE LOGIC (No Req/Res)
 export const sendVerificationMailLogic = async (email, password) => {
     let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, // true for 465
+        service: 'gmail',
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
         },
-        // Force IPv4
-        lookup: ipv4Lookup,
-        family: 4,
+        connectionTimeout: 60000, // Wait 1 minute
+        greetingTimeout: 60000,
+        socketTimeout: 60000,
         tls: {
-            rejectUnauthorized: false,
-            minVersion: 'TLSv1.2'
-        },
-        connectionTimeout: 30000, // 30 seconds
-        greetingTimeout: 30000,
-        socketTimeout: 30000,
-        debug: true,
-        logger: true
+            rejectUnauthorized: false
+        }
     });
 
     const verifyLink = process.env.FRONTEND_URL || `http://localhost:3000/vemail/${email}`;
     const year       = new Date().getFullYear();
 
     let mailOptions = {
-        from: process.env.MAIL_USER,
+        from: `"Capital Collateral" <${process.env.MAIL_USER}>`,
         to: email,
         subject: 'Welcome to Capital Collateral — Verify Your Account',
         html: `<!DOCTYPE html>
@@ -216,32 +208,24 @@ export const forgetPassword = (req, res) => {
     }
 
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        service: 'gmail',
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
         },
-        // Force IPv4
-        lookup: ipv4Lookup,
-        family: 4,
+        connectionTimeout: 60000,
+        greetingTimeout: 60000,
+        socketTimeout: 60000,
         tls: {
-            rejectUnauthorized: false,
-            minVersion: 'TLSv1.2'
-        },
-        connectionTimeout: 30000,
-        greetingTimeout: 30000,
-        socketTimeout: 30000,
-        debug: true,
-        logger: true
+            rejectUnauthorized: false
+        }
     });
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
     const resetLink = `${FRONTEND_URL}/resetpassword/${email}`;
     const year      = new Date().getFullYear();
 
     const mailOptions = {
-        from: '"Capital Collateral" <hardiksingnath@gmail.com>',
+        from: `"Capital Collateral" <${process.env.MAIL_USER}>`,
         to: email,
         subject: 'Reset Your Password — Capital Collateral',
         html: `<!DOCTYPE html>
