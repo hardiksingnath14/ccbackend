@@ -12,7 +12,8 @@ function sendMail(email, password) {
         }
     });
 
-    const verifyLink = process.env.FRONTEND_URL || `http://localhost:3000/vemail/${email}`;
+    const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+    const verifyLink   = `${FRONTEND_URL}/vemail/${email}`;
     const year       = new Date().getFullYear();
 
     let mailOptions = {
