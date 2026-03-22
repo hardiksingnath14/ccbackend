@@ -10,9 +10,8 @@ import ForgetPassword from './mailer_api/fp.controller.js';
 import SubCategoryRouter from "./routes/subcategory.router.js";
 import PaymentRouter from "./routes/payment.router.js";
 import aiChatRoute from "./routes/aiChat.js";
-import dns from "dns"; 
+
 dotenv.config();
-dns.setDefaultResultOrder("ipv4first");
 const app = express();
 app.use(cors());
 app.use(fileUpload());
