@@ -10,8 +10,8 @@ const ipv4Lookup = (hostname, opts, cb) => {
 export const sendVerificationMailLogic = async (email, password) => {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for 587
+        port: 465,
+        secure: true, // true for 465
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
@@ -20,13 +20,14 @@ export const sendVerificationMailLogic = async (email, password) => {
         lookup: ipv4Lookup,
         family: 4,
         tls: {
-            rejectUnauthorized: false
+            rejectUnauthorized: false,
+            minVersion: 'TLSv1.2'
         },
-        connectionTimeout: 10000, // 10 seconds
-        greetingTimeout: 10000,
-        socketTimeout: 15000,
-        debug: true, // Show internal logs
-        logger: true // Log to console
+        connectionTimeout: 30000, // 30 seconds
+        greetingTimeout: 30000,
+        socketTimeout: 30000,
+        debug: true,
+        logger: true
     });
 
     const verifyLink = process.env.FRONTEND_URL || `http://localhost:3000/vemail/${email}`;
@@ -216,8 +217,8 @@ export const forgetPassword = (req, res) => {
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for 587
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
@@ -226,11 +227,12 @@ export const forgetPassword = (req, res) => {
         lookup: ipv4Lookup,
         family: 4,
         tls: {
-            rejectUnauthorized: false
+            rejectUnauthorized: false,
+            minVersion: 'TLSv1.2'
         },
-        connectionTimeout: 10000,
-        greetingTimeout: 10000,
-        socketTimeout: 15000,
+        connectionTimeout: 30000,
+        greetingTimeout: 30000,
+        socketTimeout: 30000,
         debug: true,
         logger: true
     });
