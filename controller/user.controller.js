@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import rs from "randomstring";
 import sendMail from "../mailer_api/mailer.js";
 import bcrypt from "bcrypt";
+import axios from 'axios';
 export const save = async (req, res) => {
 
   try {
@@ -25,10 +26,41 @@ export const save = async (req, res) => {
 
 
 export const login = async (req, res) => {
-  console.log("hello");
-  const users = await UserSchemaModel.find({ email: req.body.email, status: 1 }).select("+password");
+  const { email, password, captchaToken } = req.body;
+
+  // 1. Verify reCAPTCHA (MANDATORY)
+  if (!captchaToken) {
+    return res.status(400).json({ status: false, msg: "Please solve the reCAPTCHA to continue" });
+  }
+
+  try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY || "6Le4m5MsAAAAAOdMO9ZSQaJPBdT39AN4lX9DU554";
+    
+    // Google reCAPTCHA requires data to be sent as application/x-www-form-urlencoded
+    const response = await axios.post(
+      'https://www.google.com/recaptcha/api/siteverify',
+      null,
+      {
+        params: {
+          secret: secretKey,
+          response: captchaToken
+        }
+      }
+    );
+
+    if (!response.data.success) {
+      console.log("reCAPTCHA Fail Details:", response.data);
+      return res.status(400).json({ status: false, msg: "reCAPTCHA verification failed" });
+    }
+  } catch (error) {
+    console.error("reCAPTCHA Error:", error);
+    return res.status(500).json({ status: false, msg: "Error verifying reCAPTCHA" });
+  }
+
+  // 2. Normal Login Authentication
+  const users = await UserSchemaModel.find({ email: email, status: 1 }).select("+password");
   if (users.length > 0) {
-    const match = await bcrypt.compare(req.body.password, users[0].password);
+    const match = await bcrypt.compare(password, users[0].password);
     if (match) {
       const payload = users[0].email;
       const key = rs.generate(20);
@@ -36,11 +68,11 @@ export const login = async (req, res) => {
       res.status(200).json({ "status": true, "token": token, "info": users[0] });
     }
     else {
-      res.status(404).json({ "status": false });
+      res.status(404).json({ "status": false, msg: "Invalid password" });
     }
   }
   else {
-    res.status(404).json({ "status": false });
+    res.status(404).json({ "status": false, msg: "User not found or account not verified" });
   }
 };
 
