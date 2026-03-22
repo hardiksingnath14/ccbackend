@@ -76,3 +76,13 @@ export const verifyPayment = async (req, res) => {
         res.status(500).json({ status: false, error: error.message });
     }
 };
+
+export const fetch = async (req, res) => {
+    try {
+        const condition = req.query || {};
+        const payments = await PaymentSchemaModel.find(condition).sort({ _id: -1 });
+        res.status(200).json({ status: true, info: payments });
+    } catch (error) {
+        res.status(500).json({ status: false, error: error.message });
+    }
+};
