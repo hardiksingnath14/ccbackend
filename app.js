@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import UserRouter from "./routes/user.router.js";
@@ -5,13 +8,11 @@ import ProductRouter from "./routes/porduct.router.js";
 import CategoryRouter from "./routes/category.router.js";
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
-import dotenv from "dotenv";
 import ForgetPassword from './mailer_api/fp.controller.js';
 import SubCategoryRouter from "./routes/subcategory.router.js";
 import PaymentRouter from "./routes/payment.router.js";
 import aiChatRoute from "./routes/aiChat.js";
 
-dotenv.config();
 const app = express();
 app.use(cors());
 app.use(fileUpload());
