@@ -14,7 +14,7 @@ const ForgetPassword = (req, res) => {
             pass: process.env.MAIL_PASS
         }
     });
-    const FRONTEND_URL = "http://localhost:3000";
+    const FRONTEND_URL =  process.env.FRONTEND_URL || "http://localhost:3000";
     const resetLink = `${FRONTEND_URL}/resetpassword/${email}`;
     const year      = new Date().getFullYear();
 
