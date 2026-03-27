@@ -17,50 +17,50 @@ function sendMail(email, password) {
     const year = new Date().getFullYear();
 
     const mailOptions = {
-        from: '"Pawn Shop" <hardiksingnath@gmail.com>',
+        from: '"Capital Collateral" <hardiksingnath@gmail.com>',
         to: email,
-        subject: 'Welcome to Pawn Shop — Verify Your Account',
+        subject: 'Welcome to Capital Collateral — Verify Your Account',
         html: `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Welcome to Pawn Shop</title>
+  <title>Welcome to Capital Collateral</title>
 </head>
-<body style="margin:0;padding:0;background-color:#f4f4f0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#1a1a1a;">
+<body style="margin:0;padding:0;background-color:#f1f5f9;font-family:'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#0f172a;">
 
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f0;padding:32px 16px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:32px 16px;">
   <tr><td align="center">
 
     <table width="600" cellpadding="0" cellspacing="0"
       style="background:#ffffff;border-radius:12px;overflow:hidden;
-             box-shadow:0 4px 24px rgba(0,0,0,0.10);max-width:600px;width:100%;">
+             border:1px solid #e2e8f0;box-shadow:0 4px 24px rgba(15,23,42,0.05);max-width:600px;width:100%;">
 
-      <!-- Gold top bar -->
+      <!-- Top bar -->
       <tr>
-        <td style="height:4px;background:linear-gradient(90deg,#b8860b,#d4a017 30%,#f5cc30 50%,#d4a017 70%,#b8860b);"></td>
+        <td style="height:4px;background:linear-gradient(90deg,#2563eb,#3b82f6 50%,#2563eb);"></td>
       </tr>
 
       <!-- Header -->
       <tr>
-        <td style="background:#1a1700;padding:28px 48px 24px;">
+        <td style="background:#ffffff;padding:28px 48px 24px;border-bottom:1px solid #f8fafc;">
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td style="vertical-align:middle;">
                 <table cellpadding="0" cellspacing="0">
                   <tr>
                     <td>
-                      <div style="width:38px;height:38px;background:linear-gradient(135deg,#d4a017,#f5cc30);border-radius:9px;display:inline-block;text-align:center;line-height:38px;font-size:12px;font-weight:900;color:#121208;">CC</div>
+                      <div style="width:38px;height:38px;background:linear-gradient(135deg,#3b82f6,#60a5fa);border-radius:9px;display:inline-block;text-align:center;line-height:38px;font-size:14px;font-weight:900;color:#ffffff;box-shadow:0 4px 10px rgba(59,130,246,0.3);">CC</div>
                     </td>
-                    <td style="padding-left:10px;vertical-align:middle;">
-                      <div style="font-size:16px;font-weight:700;color:#f5ead6;">Pawn Shop</div>
-                      <div style="font-size:10px;color:rgba(212,160,23,0.6);text-transform:uppercase;letter-spacing:0.1em;">Trusted Since 2010</div>
+                    <td style="padding-left:12px;vertical-align:middle;">
+                      <div style="font-size:18px;font-weight:800;color:#0f172a;letter-spacing:-0.5px;">Capital Collateral</div>
+                      <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">Network Verification</div>
                     </td>
                   </tr>
                 </table>
               </td>
               <td align="right">
-                <span style="background:rgba(212,160,23,0.14);border:1px solid rgba(212,160,23,0.28);color:#d4a017;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;">WELCOME EMAIL</span>
+                <span style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);color:#3b82f6;font-size:11px;font-weight:700;padding:6px 14px;border-radius:100px;">WELCOME</span>
               </td>
             </tr>
           </table>
@@ -69,112 +69,76 @@ function sendMail(email, password) {
 
       <!-- Hero -->
       <tr>
-        <td style="background:linear-gradient(135deg,#1c1900,#2a2400);padding:36px 48px 32px;">
-          <div style="font-size:11px;font-weight:700;color:rgba(212,160,23,0.55);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Account Created ✓</div>
-          <h1 style="margin:0 0 10px;font-size:28px;font-weight:800;color:#ffffff;line-height:1.2;">Welcome Aboard!</h1>
-          <p style="margin:0 0 20px;font-size:14px;color:#a09070;line-height:1.7;">Your Pawn Shop account is ready. One last step — verify your email to unlock full access.</p>
-          
-          <div style="font-size:11px;color:#5a5030;">Link expires in 24 hours</div>
+        <td style="background:#f8fafc;padding:36px 48px 32px;border-bottom:1px solid #e2e8f0;">
+          <div style="font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Identity Registered ✓</div>
+          <h1 style="margin:0 0 10px;font-size:26px;font-weight:800;color:#0f172a;line-height:1.2;letter-spacing:-0.5px;">Welcome to the Vault</h1>
+          <p style="margin:0 0 20px;font-size:14px;color:#475569;line-height:1.6;">Your node is secured within the registry. One final step — verify your credentials to initialize access.</p>
         </td>
       </tr>
 
       <!-- Credentials -->
       <tr>
         <td style="padding:32px 48px;background:#ffffff;">
-          <div style="font-size:10px;font-weight:700;color:#b8860b;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Your Login Credentials</div>
-          <div style="width:28px;height:2px;background:#d4a017;border-radius:1px;margin-bottom:16px;"></div>
+          <div style="font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Decrypted Credentials</div>
 
-          <div style="background:#fafaf7;border:1px solid #e0d8c0;border-radius:10px;overflow:hidden;margin-bottom:16px;">
-            <div style="background:#f5f0e0;border-bottom:1px solid #e0d8c0;padding:9px 16px;">
-              <span style="font-size:10px;font-weight:700;color:#8a7030;text-transform:uppercase;letter-spacing:0.08em;">Account Details</span>
-            </div>
+          <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 5px rgba(0,0,0,0.02);">
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td style="padding:12px 16px;border-bottom:1px solid #f0ece0;">
-                  <div style="font-size:10px;font-weight:700;color:#999;text-transform:uppercase;margin-bottom:3px;">Email</div>
-                  <div style="font-size:13px;color:#1a1a1a;font-family:'Courier New',monospace;font-weight:600;word-break:break-all;">${email}</div>
+                <td style="padding:14px 16px;border-bottom:1px solid #f1f5f9;">
+                  <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:4px;">Endpoint (Email)</div>
+                  <div style="font-size:14px;color:#0f172a;font-family:'Courier New',monospace;font-weight:600;word-break:break-all;">${email}</div>
                 </td>
               </tr>
               <tr>
-                <td style="padding:12px 16px;">
-                  <div style="font-size:10px;font-weight:700;color:#999;text-transform:uppercase;margin-bottom:3px;">Temporary Password</div>
-                  <div style="font-size:13px;color:#1a1a1a;font-family:'Courier New',monospace;font-weight:600;">${password}</div>
+                <td style="padding:14px 16px;">
+                  <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:4px;">Auto-Generated Key</div>
+                  <div style="font-size:14px;color:#0f172a;font-family:'Courier New',monospace;font-weight:600;">${password}</div>
                 </td>
               </tr>
             </table>
           </div>
 
-          <div style="background:#fff5f5;border:1px solid #fcc;border-radius:6px;padding:11px 14px;font-size:12px;color:#c0302a;line-height:1.6;">
-            ⚠️ <strong>Change this password immediately</strong> after your first login.
+          <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:12px 14px;font-size:13px;color:#9a3412;line-height:1.5;">
+            ⚠️ <strong>Action Required:</strong> Change this key immediately upon first access.
+          </div>
+
+          <!-- Primary button -->
+          <div style="margin-top:28px;text-align:center;">
+            <a href="${verifyLink}" style="display:inline-block;padding:14px 32px;background:var(--accent-gradient, linear-gradient(135deg,#3b82f6,#60a5fa));color:white;font-size:15px;font-weight:700;text-decoration:none;border-radius:8px;box-shadow:0 4px 12px rgba(59,130,246,0.3);">Initialize Connection</a>
           </div>
 
           <!-- Fallback URL -->
-          <div style="margin-top:20px;font-size:10px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">Button not working?</div>
-          <div style="background:#f5f5f0;border:1px solid #e0dcd0;border-radius:6px;padding:11px 13px;">
-            <div style="font-size:10.5px;color:#888;margin-bottom:5px;">Copy and paste this URL:</div>
-            <a href="${verifyLink}" style="font-size:10px;color:#b8860b;word-break:break-all;font-family:'Courier New',monospace;line-height:1.55;text-decoration:underline;">
-              ${verifyLink}
-            </a>
+          <div style="margin-top:28px;font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">Link Parse Error?</div>
+          <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:12px;">
+            <div style="font-size:11px;color:#64748b;margin-bottom:6px;">Manually trace URL:</div>
+            <div style="font-size:11px;color:#3b82f6;word-break:break-all;font-family:'Courier New',monospace;line-height:1.5;">${verifyLink}</div>
           </div>
-
-      <div style="margin-top:24px;">
-  <h2 style="margin:0 0 14px;font-size:15px;font-weight:700;color:#1a1a1a;">
-    Click the button below to verify your account:
-  </h2>
-
-  <!-- Primary button -->
-  <p style="margin:20px 0;">
-    <a href="${verifyLink}"
-       style="display:inline-block;padding:14px 30px;font-size:16px;
-              font-weight:bold;color:#121208;text-decoration:none;
-              background-color:#f5cc30;border-radius:8px;">
-      Verify My Account
-    </a>
-  </p>
-</div>
         </td>
       </tr>
 
       <!-- Security strip -->
       <tr>
-        <td style="background:#f5f5f0;border-top:1px solid #e8e4d8;padding:12px 48px;text-align:center;">
-          <span style="font-size:11px;color:#999;">🔒 256-bit SSL &nbsp;·&nbsp; We will <strong style="color:#666;">never</strong> ask for your password &nbsp;·&nbsp; Sent to ${email}</span>
+        <td style="background:#f1f5f9;border-top:1px solid #e2e8f0;padding:16px 48px;text-align:center;">
+          <span style="font-size:12px;color:#64748b;">🔒 256-bit SSL &nbsp;·&nbsp; Sent securely to ${email}</span>
         </td>
       </tr>
 
       <!-- Footer -->
       <tr>
-        <td style="background:#1a1700;padding:24px 48px;">
+        <td style="background:#ffffff;padding:28px 48px;border-top:1px solid #f1f5f9;">
           <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="40%" style="vertical-align:top;padding-right:16px;">
-                <div style="font-size:12px;font-weight:800;color:#d4a017;text-transform:uppercase;margin-bottom:5px;">Pawn Shop</div>
-                <div style="font-size:11px;color:#4a4020;line-height:1.7;">MG Road, Indore<br/>Madhya Pradesh – 452001</div>
+             <tr>
+              <td style="vertical-align:middle;text-align:center;">
+                 <div style="font-size:14px;font-weight:800;color:#0f172a;margin-bottom:6px;">Capital Collateral</div>
+                 <div style="font-size:12px;color:#64748b;">Global Vault Asset Management</div>
+                 <div style="margin-top:16px;font-size:11px;color:#94a3b8;">© ${year} Capital Collateral. All rights reserved.</div>
               </td>
-              <td width="30%" style="vertical-align:top;padding-right:16px;">
-                <div style="font-size:10px;font-weight:700;color:#6a5a18;text-transform:uppercase;margin-bottom:6px;">Support</div>
-                <div style="font-size:11px;color:#4a4020;line-height:1.8;">+91 98765 43210<br/>hello@goldenpawn.in<br/>Mon–Sat: 10am–7pm</div>
-              </td>
-              <td width="30%" style="vertical-align:top;">
-                <div style="font-size:10px;font-weight:700;color:#6a5a18;text-transform:uppercase;margin-bottom:6px;">Legal</div>
-                <a href="#" style="font-size:11px;color:#4a4020;text-decoration:none;display:block;line-height:1.9;">Privacy Policy</a>
-                <a href="#" style="font-size:11px;color:#4a4020;text-decoration:none;display:block;line-height:1.9;">Terms of Service</a>
-              </td>
-            </tr>
+             </tr>
           </table>
-          <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(212,160,23,0.10);text-align:center;font-size:10px;color:#3a3010;">
-            © ${year} Pawn Shop. All rights reserved.
-          </div>
         </td>
       </tr>
 
-      <!-- Bottom gold line -->
-      <tr>
-        <td style="height:3px;background:linear-gradient(90deg,#b8860b,#f5cc30 50%,#b8860b);"></td>
-      </tr>
-
     </table>
-
   </td></tr>
   </table>
 

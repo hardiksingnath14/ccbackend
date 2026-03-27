@@ -26,35 +26,36 @@ const ContactMailer = (req, res) => {
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>New Message from Pawn Shop</title>
+  <title>New Message from Capital Collateral</title>
 </head>
-<body style="margin:0;padding:0;background-color:#f4f4f0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background-color:#f8fafc;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:#0f172a;">
 
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f0;padding:32px 16px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;padding:32px 16px;">
   <tr><td align="center">
 
     <table width="600" cellpadding="0" cellspacing="0"
       style="background:#ffffff;border-radius:12px;overflow:hidden;
-             box-shadow:0 4px 24px rgba(0,0,0,0.10);max-width:600px;width:100%;">
+             box-shadow:0 4px 24px rgba(0,0,0,0.05);border:1px solid #e2e8f0;max-width:600px;width:100%;">
 
-      <!-- Gold top bar -->
+      <!-- Top bar -->
       <tr>
-        <td style="height:4px;background:linear-gradient(90deg,#b8860b,#d4a017 30%,#f5cc30 50%,#d4a017 70%,#b8860b);"></td>
+        <td style="height:4px;background:linear-gradient(90deg,#2563eb,#3b82f6 50%,#2563eb);"></td>
       </tr>
 
       <!-- Header -->
       <tr>
-        <td style="background:#1a1700;padding:28px 48px 24px;">
+        <td style="background:#ffffff;padding:28px 48px 24px;border-bottom:1px solid #f1f5f9;">
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td style="vertical-align:middle;">
                 <table cellpadding="0" cellspacing="0">
                   <tr>
                     <td>
-                      <div style="width:38px;height:38px;background:linear-gradient(135deg,#d4a017,#f5cc30);border-radius:9px;display:inline-block;text-align:center;line-height:38px;font-size:12px;font-weight:900;color:#121208;">CC</div>
+                      <div style="width:38px;height:38px;background:linear-gradient(135deg,#3b82f6,#60a5fa);border-radius:9px;display:inline-block;text-align:center;line-height:38px;font-size:14px;font-weight:900;color:#ffffff;box-shadow:0 4px 10px rgba(59,130,246,0.3);">CC</div>
                     </td>
-                    <td style="padding-left:10px;vertical-align:middle;">
-                      <div style="font-size:16px;font-weight:700;color:#f5ead6;">Pawn Shop</div>
+                    <td style="padding-left:12px;vertical-align:middle;">
+                      <div style="font-size:18px;font-weight:800;color:#0f172a;letter-spacing:-0.5px;">Capital Collateral</div>
+                      <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">Network Notification</div>
                     </td>
                   </tr>
                 </table>
@@ -67,34 +68,34 @@ const ContactMailer = (req, res) => {
       <!-- Content -->
       <tr>
         <td style="padding:40px 48px;">
-          <h2 style="margin:0 0 20px;font-size:22px;color:#1a1700;">New Inquiry Received</h2>
-          <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#4a4a4a;">
-            You have received a new message through the website contact form.
+          <h2 style="margin:0 0 20px;font-size:20px;font-weight:800;color:#0f172a;">New Inquiry Received</h2>
+          <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#475569;">
+            You have received a new message through the platform contact interface.
           </p>
 
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#fafaf7;border-radius:8px;padding:20px;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:20px;">
             <tr>
-              <td style="padding-bottom:12px;">
-                <div style="font-size:12px;font-weight:700;color:#b8860b;text-transform:uppercase;">From</div>
-                <div style="font-size:15px;color:#1a1700;">${name} (${email})</div>
+              <td style="padding-bottom:14px;">
+                <div style="font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">From</div>
+                <div style="font-size:15px;color:#0f172a;font-weight:600;">${name} <span style="font-weight:400;color:#64748b;">(${email})</span></div>
               </td>
             </tr>
             <tr>
-              <td style="padding-bottom:12px;">
-                <div style="font-size:12px;font-weight:700;color:#b8860b;text-transform:uppercase;">Phone</div>
-                <div style="font-size:15px;color:#1a1700;">${phone || 'N/A'}</div>
+              <td style="padding-bottom:14px;">
+                <div style="font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Phone</div>
+                <div style="font-size:15px;color:#0f172a;">${phone || 'N/A'}</div>
               </td>
             </tr>
             <tr>
-              <td style="padding-bottom:12px;">
-                <div style="font-size:12px;font-weight:700;color:#b8860b;text-transform:uppercase;">Subject</div>
-                <div style="font-size:15px;color:#1a1700;">${subject || 'No Subject'}</div>
+              <td style="padding-bottom:14px;">
+                <div style="font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Subject</div>
+                <div style="font-size:15px;color:#0f172a;font-weight:600;">${subject || 'No Subject'}</div>
               </td>
             </tr>
             <tr>
               <td>
-                <div style="font-size:12px;font-weight:700;color:#b8860b;text-transform:uppercase;">Message</div>
-                <div style="font-size:15px;color:#1a1700;line-height:1.6;white-space:pre-wrap;">${message}</div>
+                <div style="font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Message</div>
+                <div style="font-size:15px;color:#334155;line-height:1.6;white-space:pre-wrap;background:#ffffff;padding:12px;border:1px solid #e2e8f0;border-radius:6px;">${message}</div>
               </td>
             </tr>
           </table>
@@ -103,8 +104,8 @@ const ContactMailer = (req, res) => {
 
       <!-- Footer -->
       <tr>
-        <td style="background:#1a1700;padding:24px 48px;text-align:center;">
-          <div style="font-size:11px;color:#6a5a18;">© ${year} Pawn Shop. All rights reserved.</div>
+        <td style="background:#f8fafc;padding:24px 48px;text-align:center;border-top:1px solid #f1f5f9;">
+          <div style="font-size:12px;color:#64748b;">© ${year} Capital Collateral. All rights reserved.</div>
         </td>
       </tr>
     </table>
