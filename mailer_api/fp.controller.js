@@ -19,9 +19,9 @@ const ForgetPassword = (req, res) => {
     const year      = new Date().getFullYear();
 
     const mailOptions = {
-        from: '"Capital Collateral" <hardiksingnath@gmail.com>',
+        from: '"Pawn Shop" <hardiksingnath@gmail.com>',
         to: email,
-        subject: 'Reset Your Password — Capital Collateral',
+        subject: 'Reset Your Password — Pawn Shop',
         html: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +57,7 @@ const ForgetPassword = (req, res) => {
                                   font-size:12px;font-weight:900;color:#121208;">CC</div>
                     </td>
                     <td style="padding-left:10px;vertical-align:middle;">
-                      <div style="font-size:16px;font-weight:700;color:#f5ead6;">Capital Collateral</div>
+                      <div style="font-size:16px;font-weight:700;color:#f5ead6;">Pawn Shop</div>
                       <div style="font-size:10px;color:rgba(212,160,23,0.6);text-transform:uppercase;letter-spacing:0.1em;">Trusted Since 2010</div>
                     </td>
                   </tr>
@@ -89,7 +89,7 @@ const ForgetPassword = (req, res) => {
                   <span style="color:#f5cc30;">Account Password</span>
                 </h1>
                 <p style="margin:0 0 24px;font-size:14px;color:#9a8060;line-height:1.7;">
-                  We received a request to reset the password for your Capital Collateral account. Click the button to set a new password.
+                  We received a request to reset the password for your Pawn Shop account. Click the button to set a new password.
                 </p>
               <p style="margin:20px 0;">
   <a href="${resetLink}" style="color:#d4a017;font-size:16px;font-weight:bold;">
@@ -150,7 +150,7 @@ const ForgetPassword = (req, res) => {
                   Hello, <span style="color:#b8860b;">${email}</span>
                 </p>
                 <p style="margin:0 0 18px;font-size:14px;color:#555;line-height:1.75;">
-                  Someone (hopefully you) requested a password reset for your Capital Collateral account. Click the button to choose a new password.
+                  Someone (hopefully you) requested a password reset for your Pawn Shop account. Click the button to choose a new password.
                 </p>
 
                 <!-- Safety callout -->
@@ -207,7 +207,7 @@ const ForgetPassword = (req, res) => {
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td width="30%" style="vertical-align:top;padding-right:20px;">
-                <div style="font-size:12px;font-weight:800;color:#d4a017;text-transform:uppercase;margin-bottom:6px;">Capital Collateral</div>
+                <div style="font-size:12px;font-weight:800;color:#d4a017;text-transform:uppercase;margin-bottom:6px;">Pawn Shop</div>
                 <div style="font-size:11px;color:#4a4020;line-height:1.7;">MG Road, Indore<br/>Madhya Pradesh – 452001</div>
               </td>
               <td width="23%" style="vertical-align:top;padding-right:20px;">
@@ -229,7 +229,7 @@ const ForgetPassword = (req, res) => {
           </table>
           <div style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(212,160,23,0.12);
                       text-align:center;font-size:10.5px;color:#3a3010;">
-            © ${year} Capital Collateral. All rights reserved.
+            © ${year} Pawn Shop. All rights reserved.
           </div>
         </td>
       </tr>

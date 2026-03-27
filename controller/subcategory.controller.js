@@ -31,10 +31,7 @@ export const save = async (req, res) => {
 export const fetch=async(req,res)=>{
   var condition_obj=req.query; 
   var scList=await SubCategorySchemaModel.find(condition_obj);
-  if(scList.length!=0)
-    res.status(200).json({"status":true,"info":scList});
-  else
-    res.status(404).json({"status":false});    
+  res.status(200).json({"status":true,"info":scList});
 };
 
 

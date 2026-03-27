@@ -9,6 +9,7 @@ import CategoryRouter from "./routes/category.router.js";
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import ForgetPassword from './mailer_api/fp.controller.js';
+import ContactMailer from './mailer_api/contact.controller.js';
 import SubCategoryRouter from "./routes/subcategory.router.js";
 import PaymentRouter from "./routes/payment.router.js";
 import aiChatRoute from "./routes/aiChat.js";
@@ -27,6 +28,7 @@ app.use("/payment", PaymentRouter);
 
 //route for forgetpassword
 app.post("/forgetpassword",ForgetPassword);
+app.post("/contact", ContactMailer);
 app.get("/",(req,res)=>{
     res.send("Backend is live");
 });

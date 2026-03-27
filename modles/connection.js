@@ -4,7 +4,7 @@ import mongoose from "mongoose";
  //mongoose.connect("mongodb://127.0.0.1:27017/silverpawn");
  dotenv.config(); // 🔥 load env file
 
-  mongoose.connect(process.env.DB_URL)
+  mongoose.connect(process.env.DB_URL || "mongodb://127.0.0.1:27017/silverpawn")
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 

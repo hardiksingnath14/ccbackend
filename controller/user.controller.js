@@ -107,6 +107,7 @@ export var update = async (req, res) => {
   try {
     // CHANGE: Hash password on update to avoid storing plaintext and to make login work
     // WHY: bcrypt.compare during login expects a hashed DB value
+    console.log("Update Request Body:", req.body);
     const { condition_obj = {}, content_obj = {} } = req.body;
     let userDetails = await UserSchemaModel.findOne(condition_obj);
     if (userDetails) {
@@ -126,6 +127,89 @@ export var update = async (req, res) => {
   } catch (error) {
     res.status(500).json({ "status": false });
   };
+};
+
+export const updatePassword = async (req, res) => {
+  try {
+    const { email, oldPassword, newPassword } = req.body;
+    let user = await UserSchemaModel.findOne({ email }).select("+password");
+    if (!user) {
+      return res.status(404).json({ status: false, msg: "User not found" });
+    }
+
+    const match = await bcrypt.compare(oldPassword, user.password);
+    if (!match) {
+      return res.status(404).json({ status: false, msg: "Old password incorrect" });
+    }
+
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+    
+    await UserSchemaModel.updateOne({ email }, { $set: { password: hashedPassword } });
+    res.status(200).json({ status: true });
+  } catch (error) {
+    res.status(500).json({ status: false });
+  }
+};
+
+export const googleClient = async (req, res) => {
+    try {
+        const clientId = process.env.GOOGLE_CLIENT_ID || "";
+        res.status(200).json({ status: true, clientId });
+    } catch (error) {
+        res.status(500).json({ status: false });
+    }
+}
+
+export const googleLogin = async (req, res) => {
+    try {
+        const { idToken } = req.body;
+        if (!idToken) return res.status(400).json({ status: false, msg: "idToken required" });
+
+        const resp = await globalThis.fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`);
+        if (!resp.ok) return res.status(401).json({ status: false, msg: "invalid_google_token" });
+
+        const info = await resp.json();
+
+        const email = info.email || "";
+        const name = info.name || (email ? email.split("@")[0] : "user");
+        if (!email) return res.status(400).json({ status: false, msg: "email_missing" });
+
+        let user = await UserSchemaModel.findOne({ email });
+        if (!user) {
+            const users = await UserSchemaModel.find();
+            const _id = users.length === 0 ? 1 : users[users.length - 1]._id + 1;
+
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(rs.generate(12), saltRounds);
+            const randomMobile = parseInt(rs.generate({ length: 10, charset: 'numeric' }));
+
+            user = await UserSchemaModel.create({
+                _id,
+                name: name,
+                email,
+                password: hashedPassword,
+                mobile: randomMobile,
+                address: "Not Provided",
+                city: "other",
+                gender: "other",
+                role: "user",
+                status: 1, 
+                info: new Date()
+            });
+        } else if (user.status !== 1) {
+            user.status = 1;
+            await user.save();
+        }
+
+        const payload = user.email;
+        const key = rs.generate(20);
+        const token = jwt.sign(payload, key);
+
+        return res.status(200).json({ status: true, token, info: user });
+    } catch (error) {
+        return res.status(500).json({ status: false, msg: error.message });
+    }
 };
 
 
